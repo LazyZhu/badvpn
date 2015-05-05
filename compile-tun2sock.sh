@@ -43,7 +43,9 @@ DEFS=( -DBADVPN_THREAD_SAFE=0 -DBADVPN_LINUX -DBADVPN_BREACTOR_BADVPN -D_GNU_SOU
 [[ $KERNEL = "2.4" ]] && DEFS=( "${DEFS[@]}" -DBADVPN_USE_SELFPIPE -DBADVPN_USE_POLL ) || DEFS=( "${DEFS[@]}" -DBADVPN_USE_SIGNALFD -DBADVPN_USE_EPOLL )
 
 [[ $ENDIAN = "little" ]] && DEFS=( "${DEFS[@]}" -DBADVPN_LITTLE_ENDIAN ) || DEFS=( "${DEFS[@]}" -DBADVPN_BIG_ENDIAN )
-    
+
+DEFS=( "${DEFS[@]}" -DBADVPN_SOCKS_UDP_RELAY )
+
 SOURCES="
 base/BLog_syslog.c
 system/BReactor_badvpn.c
@@ -53,6 +55,7 @@ system/BConnection_common.c
 system/BTime.c
 system/BUnixSignal.c
 system/BNetwork.c
+system/BDatagram_unix.c
 flow/StreamRecvInterface.c
 flow/PacketRecvInterface.c
 flow/PacketPassInterface.c
